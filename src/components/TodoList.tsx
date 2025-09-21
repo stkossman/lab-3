@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Todo } from "../types/todo";
-import AddTodoForm from "./AddTodoForm.tsx";
+import AddTodoForm from "./AddToDoForm";
 import TodoItem from "./TodoItem";
 
 const TodoList: React.FC = () => {
