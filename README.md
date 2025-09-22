@@ -4,50 +4,80 @@ This is the third task from my university React course.
 What needed to be done:
 
 _Build a small To-Do list application in React. The app should allow users to add new tasks,
-mark them as complete, and remove them + The Component Tree & Data Flow diagram in the README.md._ 
+mark them as complete, and remove them + The Component Tree & Data Flow diagram in the README.md._
 
 ## Component Tree
 
-```plaintext
-│
-└── TodoList
-│ State: [todos: Todo[]]
-│ Props: none
-│
-├── AddTodoForm
-│ │ State: [inputValue: string]
-│ │ Props: { onAddTodo: (task: string, description?:string) => void }
-│ │ ↑ Sends new task data to parent via onAddTodo callback
-│ │
-│ └── [Input Field + Add Button]
-│ │ Input manages local inputValue state
-│ └── Button triggers form submission
-│
-└── TodoItem (multiple instances)
-│ State: [isCompleted: boolean]
-│ Props: { todo: Todo, onDelete: (id: string) => void }
-│ ↑ Sends delete requests to parent via onDelete callback
-│
-├── [Checkbox]
-│ └── Toggles local isCompleted state
-│
-├── [Task Text]
-│ └── Visual styling based on isCompleted state
-│
-└── [Delete Button]
-└── Triggers onDelete callback with todo.id
+```mermaid
+graph TD;
+    App["App
+    Root component
+    Renders layout structure"]
+    
+    Footer["Footer
+    Static component"]
+    
+    TodoListWrapper["TodoListWrapper
+    State: todos[]
+    Handlers: handleAddTodo, handleDeleteTodo
+    Main container managing all todo operations"]
+    
+    TodoHeader["TodoHeader
+    Props: title
+    Displays app title"]
+    
+    AddTodoForm["AddTodoForm
+    Props: onAddTodo (callback)
+    State: task, description
+    Handles form submission & input validation"]
+    
+    TodoEmpty["TodoEmpty
+    Static component
+    Shown when no todos"]
+    
+    TodoList["TodoList
+    Props: todos[], onDelete (callback)
+    Maps over todos array"]
+    
+    TodoItem["TodoItem
+    Props: todo object, onDelete (callback)
+    State: isCompleted
+    Manages completion toggle & deletion"]
+    
+    TodoStats["TodoStats
+    Props: count
+    Shows total task count"]
+    
+    %% Root level
+    App --> TodoListWrapper
+    App --> Footer
+    
+    %% TodoListWrapper children
+    TodoListWrapper --> TodoHeader
+    TodoListWrapper --> AddTodoForm
+    TodoListWrapper --> TodoEmpty
+    TodoListWrapper --> TodoList
+    TodoListWrapper --> TodoStats
+    
+    %% AddTodoForm - no children (HTML elements only)
+    
+    %% TodoList children
+    TodoList --> TodoItem
+    
+    %% TodoItem - no children (HTML elements only)
+    
+    %% Data flow annotations
+    AddTodoForm -.->|"onAddTodo(task, description)"| TodoListWrapper
+    TodoItem -.->|"onDelete(todo.id)"| TodoList
+    TodoList -.->|"onDelete(todo.id)"| TodoListWrapper
+    
+    %% Conditional rendering
+    TodoListWrapper -.->|"todos.length === 0"| TodoEmpty
+    TodoListWrapper -.->|"todos.length > 0"| TodoList
+    TodoListWrapper -.->|"todos.length > 0"| TodoStats
 ```
 
 ## Data Flow
-
-### Props
-- App -> TodoList: No props
-- TodoList -> AddTodoForm: `onAddTodo` callback function
-- TodoList -> TodoItem: `todo` object and `onDelete` callback function
-
-### Callbacks
-- AddTodoForm -> TodoList: New task string via `onAddTodo(task)`
-- TodoItem -> TodoList: Delete request via `onDelete(id)`
 
 ### State Colocation
 - TodoList: Manages the list of todos (`todos: Todo[]`)

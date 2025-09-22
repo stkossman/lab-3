@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { TodoItemProps } from "../types/todo.ts";
+import type { TodoItemProps } from "../../../types/todo.ts";
 
 const TodoItem: React.FC<TodoItemProps> = ({ todo, onDelete }) => {
   const [isCompleted, setIsCompleted] = useState<boolean>(false);

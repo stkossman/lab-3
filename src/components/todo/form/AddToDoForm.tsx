@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { AddTodoFormProps } from "../types/todo.ts";
+import type { AddTodoFormProps } from "../../../types/todo.ts";
 
 const AddToDoForm: React.FC<AddTodoFormProps> = ({ onAddTodo }) => {
   const [task, setTask] = useState<string>("");
