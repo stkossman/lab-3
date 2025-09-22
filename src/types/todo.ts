@@ -10,16 +10,16 @@ export interface TodoItemProps {
 }
 
 export interface TodoListProps {
-    todos: Todo[];
-    onDelete: (id: string) => void;
+  todos: Todo[];
+  onDelete: (id: string) => void;
 }
 
 export interface TodoStatsProps {
-    count: number;
+  count: number;
 }
 
 export interface TodoHeaderProps {
-    title?: string;
+  title?: string;
 }
 
 export interface AddTodoFormProps {

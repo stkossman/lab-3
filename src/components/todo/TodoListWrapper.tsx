@@ -22,22 +22,22 @@ const TodoListWrapper: React.FC = () => {
     setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
   };
 
-    return (
-        <div className="w-full max-w-2xl mx-auto bg-neutral-50 rounded-xl p-6 shadow-lg">
-            <TodoHeader title="Kossman's Todo List"/>
+  return (
+    <div className="w-full max-w-2xl mx-auto bg-neutral-50 rounded-xl p-6 shadow-lg">
+      <TodoHeader title="Kossman's Todo List" />
 
-            <AddTodoForm onAddTodo={handleAddTodo} />
+      <AddTodoForm onAddTodo={handleAddTodo} />
 
-            {todos.length === 0 ? (
-                <TodoEmpty />
-            ) : (
-                <>
-                    <TodoList todos={todos} onDelete={handleDeleteTodo} />
-                    <TodoStats count={todos.length} />
-                </>
-            )}
-        </div>
-    );
+      {todos.length === 0 ? (
+        <TodoEmpty />
+      ) : (
+        <>
+          <TodoList todos={todos} onDelete={handleDeleteTodo} />
+          <TodoStats count={todos.length} />
+        </>
+      )}
+    </div>
+  );
 };
 
 export default TodoListWrapper;
