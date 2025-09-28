@@ -19,7 +19,6 @@ graph TD;
 
     TodoListWrapper["TodoListWrapper
     State: todos[]
-    Handlers: handleAddTodo, handleDeleteTodo
     Main container managing all todo operations"]
 
     TodoHeader["TodoHeader
